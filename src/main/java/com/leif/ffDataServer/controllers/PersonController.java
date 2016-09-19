@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.leif.ffDataServer.models.Person;
+import com.leif.ffDataServer.domain.Person;
 import com.leif.ffDataServer.repositories.PersonRepository;
 
 /**

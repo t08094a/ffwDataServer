@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.leif.ffDataServer.models;
+package com.leif.ffDataServer.domain;
 
 /**
  * The status of a member of the fire fighting association. (de: Mitgliedsstatus im Verein)

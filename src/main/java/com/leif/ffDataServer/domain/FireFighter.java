@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.leif.ffDataServer.models;
+package com.leif.ffDataServer.domain;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -66,7 +66,7 @@ public class FireFighter extends AbstractDocument
 
 	/**
 	 * @return
-	 * @see com.leif.ffDataServer.models.Person#getFirstName()
+	 * @see com.leif.ffDataServer.domain.Person#getFirstName()
 	 */
 	public String getFirstName()
 	{
@@ -75,7 +75,7 @@ public class FireFighter extends AbstractDocument
 
 	/**
 	 * @param firstName
-	 * @see com.leif.ffDataServer.models.Person#setFirstName(java.lang.String)
+	 * @see com.leif.ffDataServer.domain.Person#setFirstName(java.lang.String)
 	 */
 	public void setFirstName(String firstName)
 	{
@@ -84,7 +84,7 @@ public class FireFighter extends AbstractDocument
 
 	/**
 	 * @return
-	 * @see com.leif.ffDataServer.models.Person#getLastName()
+	 * @see com.leif.ffDataServer.domain.Person#getLastName()
 	 */
 	public String getLastName()
 	{
@@ -93,7 +93,7 @@ public class FireFighter extends AbstractDocument
 
 	/**
 	 * @param lastName
-	 * @see com.leif.ffDataServer.models.Person#setLastName(java.lang.String)
+	 * @see com.leif.ffDataServer.domain.Person#setLastName(java.lang.String)
 	 */
 	public void setLastName(String lastName)
 	{
@@ -102,7 +102,7 @@ public class FireFighter extends AbstractDocument
 
 	/**
 	 * @return
-	 * @see com.leif.ffDataServer.models.Person#getGender()
+	 * @see com.leif.ffDataServer.domain.Person#getGender()
 	 */
 	public Gender getGender()
 	{
@@ -111,7 +111,7 @@ public class FireFighter extends AbstractDocument
 
 	/**
 	 * @param gender
-	 * @see com.leif.ffDataServer.models.Person#setGender(com.leif.ffDataServer.models.Gender)
+	 * @see com.leif.ffDataServer.domain.Person#setGender(com.leif.ffDataServer.domain.Gender)
 	 */
 	public void setGender(Gender gender)
 	{
@@ -120,7 +120,7 @@ public class FireFighter extends AbstractDocument
 
 	/**
 	 * @return
-	 * @see com.leif.ffDataServer.models.Person#getBirthDate()
+	 * @see com.leif.ffDataServer.domain.Person#getBirthDate()
 	 */
 	public LocalDate getBirthDate()
 	{
@@ -129,7 +129,7 @@ public class FireFighter extends AbstractDocument
 
 	/**
 	 * @param birthDate
-	 * @see com.leif.ffDataServer.models.Person#setBirthDate(java.time.LocalDate)
+	 * @see com.leif.ffDataServer.domain.Person#setBirthDate(java.time.LocalDate)
 	 */
 	public void setBirthDate(LocalDate birthDate)
 	{
@@ -138,7 +138,7 @@ public class FireFighter extends AbstractDocument
 
 	/**
 	 * @return
-	 * @see com.leif.ffDataServer.models.Person#getStreet()
+	 * @see com.leif.ffDataServer.domain.Person#getStreet()
 	 */
 	public String getStreet()
 	{
@@ -147,7 +147,7 @@ public class FireFighter extends AbstractDocument
 
 	/**
 	 * @param street
-	 * @see com.leif.ffDataServer.models.Person#setStreet(java.lang.String)
+	 * @see com.leif.ffDataServer.domain.Person#setStreet(java.lang.String)
 	 */
 	public void setStreet(String street)
 	{
@@ -156,7 +156,7 @@ public class FireFighter extends AbstractDocument
 
 	/**
 	 * @return
-	 * @see com.leif.ffDataServer.models.Person#getStreetNumber()
+	 * @see com.leif.ffDataServer.domain.Person#getStreetNumber()
 	 */
 	public Integer getStreetNumber()
 	{
@@ -165,7 +165,7 @@ public class FireFighter extends AbstractDocument
 
 	/**
 	 * @param streetNumber
-	 * @see com.leif.ffDataServer.models.Person#setStreetNumber(java.lang.Integer)
+	 * @see com.leif.ffDataServer.domain.Person#setStreetNumber(java.lang.Integer)
 	 */
 	public void setStreetNumber(Integer streetNumber)
 	{
@@ -174,7 +174,7 @@ public class FireFighter extends AbstractDocument
 
 	/**
 	 * @return
-	 * @see com.leif.ffDataServer.models.Person#getStreetNumberAppendix()
+	 * @see com.leif.ffDataServer.domain.Person#getStreetNumberAppendix()
 	 */
 	public String getStreetNumberAppendix()
 	{
@@ -183,7 +183,7 @@ public class FireFighter extends AbstractDocument
 
 	/**
 	 * @param streetNumberAppendix
-	 * @see com.leif.ffDataServer.models.Person#setStreetNumberAppendix(java.lang.String)
+	 * @see com.leif.ffDataServer.domain.Person#setStreetNumberAppendix(java.lang.String)
 	 */
 	public void setStreetNumberAppendix(String streetNumberAppendix)
 	{
@@ -192,7 +192,7 @@ public class FireFighter extends AbstractDocument
 
 	/**
 	 * @return
-	 * @see com.leif.ffDataServer.models.Person#getPostalCode()
+	 * @see com.leif.ffDataServer.domain.Person#getPostalCode()
 	 */
 	public Integer getPostalCode()
 	{
@@ -201,7 +201,7 @@ public class FireFighter extends AbstractDocument
 
 	/**
 	 * @param postalCode
-	 * @see com.leif.ffDataServer.models.Person#setPostalCode(java.lang.Integer)
+	 * @see com.leif.ffDataServer.domain.Person#setPostalCode(java.lang.Integer)
 	 */
 	public void setPostalCode(Integer postalCode)
 	{
@@ -210,7 +210,7 @@ public class FireFighter extends AbstractDocument
 
 	/**
 	 * @return
-	 * @see com.leif.ffDataServer.models.Person#getCity()
+	 * @see com.leif.ffDataServer.domain.Person#getCity()
 	 */
 	public String getCity()
 	{
@@ -219,7 +219,7 @@ public class FireFighter extends AbstractDocument
 
 	/**
 	 * @param city
-	 * @see com.leif.ffDataServer.models.Person#setCity(java.lang.String)
+	 * @see com.leif.ffDataServer.domain.Person#setCity(java.lang.String)
 	 */
 	public void setCity(String city)
 	{
@@ -228,7 +228,7 @@ public class FireFighter extends AbstractDocument
 
 	/**
 	 * @return
-	 * @see com.leif.ffDataServer.models.Person#getContacts()
+	 * @see com.leif.ffDataServer.domain.Person#getContacts()
 	 */
 	public List<Contact> getContacts()
 	{
@@ -237,7 +237,7 @@ public class FireFighter extends AbstractDocument
 
 	/**
 	 * @return
-	 * @see com.leif.ffDataServer.models.Person#getAge()
+	 * @see com.leif.ffDataServer.domain.Person#getAge()
 	 */
 	public int getAge()
 	{

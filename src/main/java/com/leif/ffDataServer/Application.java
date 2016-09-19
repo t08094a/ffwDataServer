@@ -7,10 +7,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.leif.ffDataServer.models.Contact;
-import com.leif.ffDataServer.models.ContactType;
-import com.leif.ffDataServer.models.FireFighter;
-import com.leif.ffDataServer.models.Person;
+import com.leif.ffDataServer.domain.Contact;
+import com.leif.ffDataServer.domain.ContactType;
+import com.leif.ffDataServer.domain.FireFighter;
+import com.leif.ffDataServer.domain.Person;
 import com.leif.ffDataServer.repositories.FireFighterRepository;
 import com.leif.ffDataServer.repositories.PersonRepository;
 

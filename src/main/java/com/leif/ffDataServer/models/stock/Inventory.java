@@ -10,8 +10,8 @@ import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.leif.ffDataServer.models.AbstractDocument;
-import com.leif.ffDataServer.models.FireFighter;
+import com.leif.ffDataServer.domain.AbstractDocument;
+import com.leif.ffDataServer.domain.FireFighter;
 
 /**
  * The moveable and not moveable inventory. (de: Inventar)

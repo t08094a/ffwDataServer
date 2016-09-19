@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.leif.ffDataServer.models.Person;
+import com.leif.ffDataServer.domain.Person;
 
 /**
  * @author leif

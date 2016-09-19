@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.leif.ffDataServer.models.FireFighter;
+import com.leif.ffDataServer.domain.FireFighter;
 
 /**
  * @author leif

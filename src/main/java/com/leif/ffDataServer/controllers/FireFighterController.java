@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.leif.ffDataServer.models.FireFighter;
-import com.leif.ffDataServer.models.Person;
+import com.leif.ffDataServer.domain.FireFighter;
+import com.leif.ffDataServer.domain.Person;
 import com.leif.ffDataServer.repositories.FireFighterRepository;
 import com.leif.ffDataServer.repositories.PersonRepository;
 

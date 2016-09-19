@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.leif.ffDataServer.models;
+package com.leif.ffDataServer.domain;
 
 /**
  * @author leif

@@ -3,8 +3,6 @@
  */
 package com.leif.ffDataServer.models;
 
-import java.math.BigInteger;
-
 import org.springframework.data.annotation.Id;
 
 /**
@@ -14,14 +12,9 @@ import org.springframework.data.annotation.Id;
 public class AbstractDocument
 {
 	@Id
-	protected BigInteger id;
+	protected String id;
 
-	// public void setId(BigInteger id)
-	// {
-	// this.documentId = id;
-	// }
-
-	public BigInteger getId()
+	public String getId()
 	{
 		return id;
 	}

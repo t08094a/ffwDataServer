@@ -1,0 +1,16 @@
+HTTPS:
+======
+https://looksok.wordpress.com/2014/11/22/spring-boot-sslhttps-for-embedded-tomcat/
+
+Zertifikat generieren
+---------------------
+keytool -genkey -alias tomcat -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
+	-> ein neuer Keystore im HOME Verzeichnis wird erstellt: .keystore
+
+
+Überprüfen
+----------
+keytool -list -keystore keystore.p12 -storetype PKCS12
+
+
+

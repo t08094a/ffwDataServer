@@ -29,7 +29,7 @@ public class FireFighter extends AbstractDocument
 	private Person				person;
 
 	@NotEmpty
-	private MemberStatus		memberStatus;
+	private MemberStatus		memberStatus = MemberStatus.Active;
 
 	@NotEmpty
 	private LocalDate			entry;

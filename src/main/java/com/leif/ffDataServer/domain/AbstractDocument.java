@@ -9,10 +9,10 @@ import org.springframework.data.annotation.Id;
  * @author leif
  *
  */
-public class AbstractDocument
+public abstract class AbstractDocument extends Auditable
 {
 	@Id
-	protected String id;
+	private String id;
 
 	public String getId()
 	{

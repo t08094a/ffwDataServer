@@ -355,7 +355,7 @@ public class FireFighter extends AbstractDocument
 	@Override
 	public String toString()
 	{
-		return String.format("Firefighter [id=%s, lastName='%s', firstName='%s']", id, person.getLastName(),
+		return String.format("Firefighter [id=%s, lastName='%s', firstName='%s']", getId(), person.getLastName(),
 				person.getFirstName());
 	}
 

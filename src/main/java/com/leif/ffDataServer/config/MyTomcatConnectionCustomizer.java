@@ -23,7 +23,7 @@ public class MyTomcatConnectionCustomizer implements TomcatConnectorCustomizer
 	@Override
 	public void customize(Connector connector)
 	{
-		connector.setPort(443);
+		connector.setPort(8443);
 		connector.setSecure(true);
 		connector.setScheme("https");
 

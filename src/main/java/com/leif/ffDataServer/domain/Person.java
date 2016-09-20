@@ -234,7 +234,7 @@ public class Person extends AbstractDocument
 	@Override
 	public String toString()
 	{
-		return String.format("Person [id=%s, lastName='%s', firstName='%s']", id, lastName, firstName);
+		return String.format("Person [id=%s, lastName='%s', firstName='%s']", getId(), lastName, firstName);
 	}
 
 	/*

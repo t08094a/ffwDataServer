@@ -30,6 +30,6 @@ public class ResourceSecurityConfiguration extends WebSecurityConfigurerAdapter
 				.deleteCookies("JSESSIONID")
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 			.and()
-				.csrf();
+				.csrf().disable();
 	}
 }

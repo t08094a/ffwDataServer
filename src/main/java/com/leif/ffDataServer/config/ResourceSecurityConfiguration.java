@@ -1,7 +1,10 @@
 package com.leif.ffDataServer.config;
 
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -9,7 +12,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableGlobalAuthentication
+@EnableGlobalMethodSecurity(securedEnabled = true)
 @EnableWebSecurity
+@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class ResourceSecurityConfiguration extends WebSecurityConfigurerAdapter
 {
 	@Override
@@ -18,17 +23,12 @@ public class ResourceSecurityConfiguration extends WebSecurityConfigurerAdapter
 		http.authorizeRequests()
 			.antMatchers("/").permitAll()
 			.antMatchers("/api/**").authenticated()
+			.antMatchers("/manage/**").authenticated()
 			.and()
-			.formLogin()
-				.defaultSuccessUrl("/api", true)
-				.permitAll()
-			.and()
-				.logout()
-				.logoutUrl("/logout/")
-				.invalidateHttpSession(true)
-				.logoutUrl("/")
-				.deleteCookies("JSESSIONID")
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.formLogin().permitAll()
+			.and().logout()
+				.logoutUrl("/logout/").logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutSuccessUrl("/login").invalidateHttpSession(true).deleteCookies("JSESSIONID")
 			.and()
 				.csrf().disable();
 	}

@@ -17,11 +17,9 @@ public class SpringSecurityAuditorAware implements AuditorAware<String>
 			return null;
 		}
 
-//		Object principal = authentication.getPrincipal();
-//		return authentication.getPrincipal().toString();
-		return "John Doe";
+		Object principal = authentication.getPrincipal();
+		System.out.println("current principal: " + principal.getClass().getName());
+		
+		return authentication.getPrincipal().toString(); //	UserDetailsService
 	}
-//	UserDetailsService
-//	
-//	http://docs.spring.io/spring-data/mongodb/docs/current/reference/html/#mongo.auditing
 }

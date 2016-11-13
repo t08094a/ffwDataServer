@@ -30,6 +30,11 @@ public class PersonController
 	@Autowired
 	private PersonRepository repository;
 
+	public PersonController()
+	{
+		System.out.println(">>> ctor PersonController");
+	}
+	
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED )
 	public Person create(@RequestBody Person person)
@@ -41,6 +46,7 @@ public class PersonController
 	@ResponseStatus(HttpStatus.OK)
 	public Person get(@PathVariable("id") String id)
 	{
+		System.out.println(">>> PersonController::getAll");
 		return repository.findOne(id);
 	}
 
@@ -63,6 +69,7 @@ public class PersonController
 	@ResponseStatus(HttpStatus.OK)
 	public List<Person> getAll()
 	{
+		System.out.println(">>> PersonController::getAll");
 		return repository.findAll();
 	}
 

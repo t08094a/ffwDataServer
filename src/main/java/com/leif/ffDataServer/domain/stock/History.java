@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.leif.ffDataServer.models.stock;
+package com.leif.ffDataServer.domain.stock;
 
 import java.time.LocalDate;
 import java.util.HashSet;

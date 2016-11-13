@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.leif.ffDataServer.domain.Account;
+import com.leif.ffDataServer.domain.Role;
 import com.leif.ffDataServer.repositories.AccountRepository;
 import com.leif.ffDataServer.services.MongoDBAuthenticationProvider;
 
@@ -69,7 +70,17 @@ public class WebAuthenticationConfiguration extends GlobalAuthenticationConfigur
 		if(accountRepository.findByUsername(username) == null)
 		{
 			Account root = new Account(username, password);
-			root.getRoles().addAll(AuthorityUtils.createAuthorityList("ADMIN", "USER"));
+			root.getRoles().addAll(AuthorityUtils.createAuthorityList(Role.ADMIN, Role.USER));
+			accountRepository.insert(root);
+		}
+		
+		username = "user";
+		password = authenticationProvider.getPasswordEncoder().encode("password");
+		
+		if(accountRepository.findByUsername(username) == null)
+		{
+			Account root = new Account(username, password);
+			root.getRoles().addAll(AuthorityUtils.createAuthorityList(Role.USER));
 			accountRepository.insert(root);
 		}
 	}

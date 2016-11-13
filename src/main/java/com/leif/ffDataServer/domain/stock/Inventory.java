@@ -1,56 +1,44 @@
 /**
  * 
  */
-package com.leif.ffDataServer.models.stock;
+package com.leif.ffDataServer.domain.stock;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.data.annotation.TypeAlias;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import com.leif.ffDataServer.domain.AbstractDocument;
-import com.leif.ffDataServer.domain.FireFighter;
 
 /**
  * The moveable and not moveable inventory. (de: Inventar)
  * @author leif
  *
  */
-@Document(collection = "inventory")
-@TypeAlias("inventory")
 public abstract class Inventory extends AbstractDocument
 {
 	@NotEmpty
-	@Indexed
-	private int inventoryNumber;
+	private Integer inventoryNumber;
 	
 	@NotEmpty
-	@Indexed
+	@DBRef
 	private InventoryCategory category;
 	
-	@Indexed
-	private FireFighter owner;
+	private LocalDate lastInspection;
 	
 	private History history;
 	
-	public Inventory(int inventoryNumber, @NotEmpty InventoryCategory category)
-	{
-		this(inventoryNumber, category, null);
-	}
-	
-	public Inventory(int inventoryNumber, @NotEmpty InventoryCategory category, FireFighter owner)
+	public Inventory(Integer inventoryNumber, @NotEmpty InventoryCategory category)
 	{
 		this.inventoryNumber = inventoryNumber;
 		this.category = category;
-		this.owner = owner;
 	}
 	
 	/**
 	 * @return the inventoryNumber
 	 */
-	public int getInventoryNumber()
+	public Integer getInventoryNumber()
 	{
 		return inventoryNumber;
 	}
@@ -58,7 +46,7 @@ public abstract class Inventory extends AbstractDocument
 	/**
 	 * @param inventoryNumber the inventoryNumber to set
 	 */
-	public void setInventoryNumber(int inventoryNumber)
+	public void setInventoryNumber(Integer inventoryNumber)
 	{
 		if(inventoryNumber <= 0)
 		{
@@ -68,24 +56,6 @@ public abstract class Inventory extends AbstractDocument
 		OnPropertyChanged("inventoryNumber", String.valueOf(this.inventoryNumber), String.valueOf(inventoryNumber));
 		
 		this.inventoryNumber = inventoryNumber;
-	}
-
-	/**
-	 * @return the owner
-	 */
-	public FireFighter getOwner()
-	{
-		return owner;
-	}
-
-	/**
-	 * @param owner the owner to set
-	 */
-	public void setOwner(FireFighter owner)
-	{
-		OnPropertyChanged("owner", this.owner.toString(), owner.toString());
-		
-		this.owner = owner;
 	}
 
 	/**
@@ -109,6 +79,32 @@ public abstract class Inventory extends AbstractDocument
 		OnPropertyChanged("category", this.category.toString(), category.toString());
 		
 		this.category = category;
+	}
+	
+	/**
+	 * @return the lastInspection
+	 */
+	public LocalDate getLastInspection()
+	{
+		return lastInspection;
+	}
+
+	/**
+	 * @param lastInspection the lastInspection to set
+	 */
+	public void setLastInspection(LocalDate lastInspection)
+	{
+		this.lastInspection = lastInspection;
+	}
+	
+	public LocalDate getNextInspectionDate()
+	{
+		if(category == null || lastInspection == null)
+		{
+			return LocalDate.now(ZoneId.of("+2"));
+		}
+		
+		return lastInspection.plusDays(category.getInspectionInterval());
 	}
 
 	/**

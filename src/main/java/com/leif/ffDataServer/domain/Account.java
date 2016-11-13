@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 public class Account extends AbstractDocument
 {
 	@NotEmpty
-	@Indexed
+	@Indexed(unique=true)
 	private String					username;
 
 	@NotEmpty

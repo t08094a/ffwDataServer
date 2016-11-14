@@ -2,49 +2,128 @@ package com.leif.ffDataServer.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoOperations;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.google.common.base.Throwables;
 import com.leif.ffDataServer.domain.stock.Inventory;
 import com.leif.ffDataServer.repositories.InventoryRepository;
 
-public abstract class InventoryController<T extends Inventory>               
+public abstract class InventoryController<T extends Inventory>
 {
-	@Autowired
-	protected InventoryRepository<T> repository;
+	private Logger					logger	= LoggerFactory.getLogger(InventoryController.class);
+	private InventoryRepository<T>	repository;
 
-	@Autowired
-	protected MongoOperations mongoOperations;
-	
-	public InventoryController()
+	public InventoryController(InventoryRepository<T> repository)
 	{
-		System.out.println(">>> ctor InventoryController");
+		logger.debug(">>> ctor InventoryController");
+
+		this.repository = repository;
 	}
-	
-	@RequestMapping(method = RequestMethod.POST)
-	public T create(@RequestBody T inventory)
+
+	@RequestMapping(value="/", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<T> create(@RequestBody T json)
 	{
-		return repository.save(inventory);
+		logger.debug("create() with body {} of type {}", json, json.getClass());
+
+		T created = repository.save(json);
+
+		if(created == null)
+		{
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		else 
+		{
+			return new ResponseEntity<>(created, HttpStatus.CREATED);
+		}
 	}
-	
-	@RequestMapping(method = RequestMethod.GET, value = "{id}")
-	public T get(@PathVariable("id") String id)
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<T> get(@PathVariable("id") String id)
 	{
-		return repository.findOne(id);
-	}
-	
-	@RequestMapping(method = RequestMethod.GET)
-	@ResponseStatus(HttpStatus.OK)
-	public List<T> getAll()
-	{
-		System.out.println(">>> InventoryController::getAll");
+		T found = repository.findOne(id);
 		
-		return repository.findAll();
-	}    
+		if(found == null)
+		{
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		else 
+		{
+			return new ResponseEntity<>(found, HttpStatus.OK);
+		}
+	}
+
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	public ResponseEntity<List<T>> getAll()
+	{
+		logger.debug(">>> InventoryController::getAll");
+
+		List<T> found = repository.findAll();
+		
+		if(found == null)
+		{
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		else 
+		{
+			return new ResponseEntity<>(found, HttpStatus.OK);
+		}
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<T> update(@PathVariable String id, @RequestBody T json)
+	{
+		logger.debug("update() of {}.id#{} with body {}", json.getClass(), id, json);
+
+		T entity = repository.findOne(id);
+		
+		if(entity == null)
+		{
+			logger.warn("the inventory of type '{}' and id {} does not exist", json.getClass(), id);
+						
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+		try
+		{
+			BeanUtils.copyProperties(entity, json);
+		} 
+		catch (Exception e)
+		{
+			logger.warn("while copying properties", e);
+			throw Throwables.propagate(e);
+		}
+
+		logger.debug("merged entity: {}", entity);
+
+		T updated = repository.save(entity);
+		logger.debug("updated enitity: {}", updated);
+
+		if(updated == null)
+		{
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		else 
+		{
+			return new ResponseEntity<>(updated, HttpStatus.OK);
+		}
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<T> delete(@PathVariable String id)
+	{
+		repository.delete(id);
+
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 }

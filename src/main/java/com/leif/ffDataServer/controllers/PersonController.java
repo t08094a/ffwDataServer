@@ -24,7 +24,7 @@ import com.leif.ffDataServer.repositories.PersonRepository;
  */
 @RestController
 @RequestMapping("/persons")
-@Secured("USER")
+//@Secured("USER")
 public class PersonController
 {
 	@Autowired

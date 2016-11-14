@@ -3,14 +3,14 @@ package com.leif.ffDataServer.domain.stock;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.mongodb.core.index.Indexed;
 
-import com.leif.ffDataServer.domain.FireFighter;
+import com.leif.ffDataServer.domain.Firefighter;
 
 public abstract class PersonalInventory extends Inventory
 {
 	@Indexed
-	private FireFighter owner;
+	private Firefighter owner;
 	
-	public PersonalInventory(int inventoryNumber, @NotEmpty InventoryCategory category, FireFighter owner)
+	public PersonalInventory(int inventoryNumber, @NotEmpty InventoryCategory category, Firefighter owner)
 	{
 		super(inventoryNumber, category);
 		
@@ -20,7 +20,7 @@ public abstract class PersonalInventory extends Inventory
 	/**
 	 * @return the owner
 	 */
-	public FireFighter getOwner()
+	public Firefighter getOwner()
 	{
 		return owner;
 	}
@@ -28,7 +28,7 @@ public abstract class PersonalInventory extends Inventory
 	/**
 	 * @param owner the owner to set
 	 */
-	public void setOwner(FireFighter owner)
+	public void setOwner(Firefighter owner)
 	{
 		OnPropertyChanged("owner", this.owner.toString(), owner.toString());
 		

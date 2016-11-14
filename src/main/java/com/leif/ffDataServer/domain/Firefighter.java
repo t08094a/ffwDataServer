@@ -24,7 +24,7 @@ import com.leif.ffDataServer.helper.AgeCalculator;
  */
 @Document(collection = "firefighters")
 @TypeAlias("firefighter")
-public class FireFighter extends AbstractDocument
+public class Firefighter extends AbstractDocument
 {
 	@DBRef
 	private Person				person;
@@ -39,7 +39,7 @@ public class FireFighter extends AbstractDocument
 
 	private List<Inventory>		inventories;
 
-	public FireFighter()
+	public Firefighter()
 	{
 	}
 
@@ -47,7 +47,7 @@ public class FireFighter extends AbstractDocument
 	 * @param person
 	 * @param entry
 	 */
-	public FireFighter(Person person, LocalDate entry)
+	public Firefighter(Person person, LocalDate entry)
 	{
 		this(person, entry, null);
 	}
@@ -58,7 +58,7 @@ public class FireFighter extends AbstractDocument
 	 * @param exit
 	 */
 	@PersistenceConstructor
-	public FireFighter(Person person, LocalDate entry, LocalDate exit)
+	public Firefighter(Person person, LocalDate entry, LocalDate exit)
 	{
 		this.person = person;
 		this.entry = entry;
@@ -386,9 +386,9 @@ public class FireFighter extends AbstractDocument
 			return true;
 		if (!super.equals(obj))
 			return false;
-		if (!(obj instanceof FireFighter))
+		if (!(obj instanceof Firefighter))
 			return false;
-		FireFighter other = (FireFighter) obj;
+		Firefighter other = (Firefighter) obj;
 		if (person == null)
 		{
 			if (other.person != null)

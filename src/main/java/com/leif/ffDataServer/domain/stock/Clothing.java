@@ -4,7 +4,7 @@ import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.leif.ffDataServer.domain.FireFighter;
+import com.leif.ffDataServer.domain.Firefighter;
 
 @Document(collection = "inventory")
 @TypeAlias("clothing")
@@ -13,12 +13,12 @@ public class Clothing extends PersonalInventory
 {
 	private Integer size;
 	
-	public Clothing(int inventoryNumber, InventoryCategory category, FireFighter owner)
+	public Clothing(int inventoryNumber, InventoryCategory category, Firefighter owner)
 	{
 		this(inventoryNumber, category, owner, 0);
 	}
 
-	public Clothing(int inventoryNumber, InventoryCategory category, FireFighter owner, Integer size)
+	public Clothing(int inventoryNumber, InventoryCategory category, Firefighter owner, Integer size)
 	{
 		super(inventoryNumber, category, owner);
 		

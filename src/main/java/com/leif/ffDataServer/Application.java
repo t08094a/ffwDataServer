@@ -9,9 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.leif.ffDataServer.domain.Contact;
 import com.leif.ffDataServer.domain.ContactType;
-import com.leif.ffDataServer.domain.FireFighter;
+import com.leif.ffDataServer.domain.Firefighter;
 import com.leif.ffDataServer.domain.Person;
-import com.leif.ffDataServer.repositories.FireFighterRepository;
+import com.leif.ffDataServer.repositories.FirefighterRepository;
 import com.leif.ffDataServer.repositories.PersonRepository;
 
 @SpringBootApplication
@@ -21,7 +21,7 @@ public class Application implements CommandLineRunner
 	private PersonRepository		personRepository;
 
 	@Autowired
-	private FireFighterRepository	firefighterRepository;
+	private FirefighterRepository	firefighterRepository;
 
 	// private final Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -89,14 +89,14 @@ public class Application implements CommandLineRunner
 		
 		Person p1 = personRepository.findByFirstName("Alice").get(0);
 				
-		FireFighter f1 = new FireFighter(p1, LocalDate.of(1980, 1, 1));
+		Firefighter f1 = new Firefighter(p1, LocalDate.of(1980, 1, 1));
 		
 		firefighterRepository.save(f1);
 		
 		System.out.println("Firefighters found with findAll():");
 		System.out.println("-------------------------------");
 		
-		for (FireFighter firefighter : firefighterRepository.findAll())
+		for (Firefighter firefighter : firefighterRepository.findAll())
 		{
 			System.out.println(firefighter);
 		}

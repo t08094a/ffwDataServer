@@ -8,7 +8,6 @@ import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
 import com.leif.ffDataServer.domain.Person;
 
@@ -16,8 +15,6 @@ import com.leif.ffDataServer.domain.Person;
  * @author leif
  *
  */
-@Repository
-//@RepositoryRestResource(collectionResourceRel = "persons", path = "persons")
 public interface PersonRepository extends MongoRepository<Person, String>
 {
 	List<Person> findByLastName(@Param("name") String lastName);

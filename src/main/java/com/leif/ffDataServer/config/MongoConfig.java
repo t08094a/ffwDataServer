@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import com.leif.ffDataServer.repositories.PersonRepository;
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
+import com.mongodb.ServerAddress;
 import com.mongodb.WriteConcern;
 
 @Configuration
@@ -32,8 +33,16 @@ public class MongoConfig extends AbstractMongoConfiguration
 	@Override
 	public Mongo mongo() throws Exception
 	{
-		String host = environment.getProperty("spring.data.mongodb.host");
-		MongoClient client = new MongoClient(host);
+		String host = environment.getProperty("spring.data.mongodb.host", "localhost");
+		Integer port = environment.getProperty("spring.data.mongodb.port", Integer.class, 27017);
+		
+		ServerAddress serverAddress = new ServerAddress(host, port);
+		
+		//MongoCredential credential = MongoCredential.createMongoCRCredential("vivek","sample","vivek".toCharArray());
+		//MongoClientOptions options = MongoClientOptions.builder().connectionsPerHost(4).socketKeepAlive(true).build();
+		//Mongo mongo = new MongoClient(serverAddress, Arrays.asList(credential),options);
+		
+		MongoClient client = new MongoClient(serverAddress);
 		client.setWriteConcern(WriteConcern.ACKNOWLEDGED);
 		return client;
 	}

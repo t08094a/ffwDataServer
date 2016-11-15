@@ -19,14 +19,11 @@ import com.leif.ffDataServer.repositories.InventoryRepository;
 
 public abstract class InventoryController<T extends Inventory>
 {
-	private Logger					logger	= LoggerFactory.getLogger(InventoryController.class);
-	private InventoryRepository<T>	repository;
+	private final Logger logger	= LoggerFactory.getLogger(this.getClass());
+	private final InventoryRepository<T>	repository;
 
 	public InventoryController(InventoryRepository<T> repository)
 	{
-		System.out.println(">>> InventoryController::ctor");
-		logger.debug(">>> ctor InventoryController");
-
 		this.repository = repository;
 	}
 
@@ -66,19 +63,20 @@ public abstract class InventoryController<T extends Inventory>
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<List<T>> getAll()
 	{
-		System.out.println(">>> InventoryController::getAll");
 		logger.debug(">>> InventoryController::getAll");
 
 		List<T> found = repository.findAll();
 		
 		if(found == null)
 		{
-			System.out.println(">>> InventoryController::getAll >>> nothing found");
+			logger.debug(">>> InventoryController::getAll >>> nothing found");
+			
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 		else 
 		{
-			System.out.println(">>> InventoryController::getAll >>> found");
+			logger.debug(">>> InventoryController::getAll >>> found");
+			
 			return new ResponseEntity<>(found, HttpStatus.OK);
 		}
 	}
@@ -125,6 +123,8 @@ public abstract class InventoryController<T extends Inventory>
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<T> delete(@PathVariable String id)
 	{
+		logger.debug("delete enitity: {}", id);
+		
 		repository.delete(id);
 
 		return new ResponseEntity<>(HttpStatus.OK);

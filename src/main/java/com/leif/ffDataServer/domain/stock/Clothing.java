@@ -13,6 +13,14 @@ public class Clothing extends PersonalInventory
 {
 	private Integer size;
 	
+	/**
+	 * Default Ctor needed by Mongo. Do NOT use it directly.
+	 */
+	public Clothing()
+	{
+		super();
+	}
+	
 	public Clothing(int inventoryNumber, InventoryCategory category, Firefighter owner)
 	{
 		this(inventoryNumber, category, owner, 0);

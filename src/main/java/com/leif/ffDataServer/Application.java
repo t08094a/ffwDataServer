@@ -11,7 +11,11 @@ import com.leif.ffDataServer.domain.Contact;
 import com.leif.ffDataServer.domain.ContactType;
 import com.leif.ffDataServer.domain.Firefighter;
 import com.leif.ffDataServer.domain.Person;
+import com.leif.ffDataServer.domain.stock.Clothing;
+import com.leif.ffDataServer.domain.stock.InventoryCategory;
 import com.leif.ffDataServer.repositories.FirefighterRepository;
+import com.leif.ffDataServer.repositories.InventoryCategoryRepository;
+import com.leif.ffDataServer.repositories.InventoryRepository;
 import com.leif.ffDataServer.repositories.PersonRepository;
 
 @SpringBootApplication
@@ -22,6 +26,12 @@ public class Application implements CommandLineRunner
 
 	@Autowired
 	private FirefighterRepository	firefighterRepository;
+	
+	@Autowired
+	private InventoryCategoryRepository		inventoryCategoryRepository;
+	
+	@Autowired
+	private InventoryRepository<Clothing>		clothingRepository;
 
 	// private final Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -35,6 +45,8 @@ public class Application implements CommandLineRunner
 	{
 		createDummyPersons();
 		createDummyFirefighters();
+		createDummyInventoryCategories();
+		createDummyClothing();
 	}
 
 	private void createDummyPersons()
@@ -101,5 +113,31 @@ public class Application implements CommandLineRunner
 			System.out.println(firefighter);
 		}
 		System.out.println();
+	}
+	
+	private void createDummyInventoryCategories()
+	{
+		inventoryCategoryRepository.deleteAll();
+		
+		InventoryCategory ic = new InventoryCategory("Jacke Bayern 2000");
+		
+		inventoryCategoryRepository.save(ic);
+	}
+	
+	private void createDummyClothing()
+	{
+		clothingRepository.deleteAll();
+				
+		Person p1 = personRepository.findByFirstName("Alice").get(0);
+		System.out.println(">>> Clothing Persons found: " + p1.getFirstName());
+		
+		Firefighter f1 = firefighterRepository.findByPerson(p1);
+		System.out.println(">>> Clothing Firefighter found: " + f1.getFirstName());
+		
+		InventoryCategory ic = inventoryCategoryRepository.findByName("Jacke Bayern 2000");
+		
+		Clothing c1 = new Clothing(7, ic, f1, 3);
+		
+		clothingRepository.save(c1);
 	}
 }

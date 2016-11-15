@@ -2,13 +2,23 @@ package com.leif.ffDataServer.domain.stock;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import com.leif.ffDataServer.domain.Firefighter;
 
 public abstract class PersonalInventory extends Inventory
 {
 	@Indexed
+	@DBRef
 	private Firefighter owner;
+	
+	/**
+	 * Default Ctor needed by Mongo. Do NOT use it directly.
+	 */
+	public PersonalInventory() 
+	{
+		super();
+	}
 	
 	public PersonalInventory(int inventoryNumber, @NotEmpty InventoryCategory category, Firefighter owner)
 	{

@@ -29,6 +29,14 @@ public abstract class Inventory extends AbstractDocument
 	
 	private History history;
 	
+	/**
+	 * Default Ctor needed by Mongo. Do NOT use it directly.
+	 */
+	public Inventory()
+	{
+		System.out.println(">>> Inventory::Ctor >>>");
+	}
+	
 	public Inventory(Integer inventoryNumber, @NotEmpty InventoryCategory category)
 	{
 		this.inventoryNumber = inventoryNumber;

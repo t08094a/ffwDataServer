@@ -22,10 +22,10 @@ public class ResourceSecurityConfiguration extends WebSecurityConfigurerAdapter
 	{
 		http.authorizeRequests()
 			.antMatchers("/").permitAll()
-			.antMatchers("/api/**").authenticated()
+			.antMatchers("/api/**").authenticated() // da root path entfernt wurde greift das hier nicht mehr
 			.antMatchers("/manage/**").authenticated()
 			.and()
-				.formLogin().permitAll()
+				.formLogin().permitAll().defaultSuccessUrl("/")
 			.and().logout()
 				.logoutUrl("/logout/").logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/login").invalidateHttpSession(true).deleteCookies("JSESSIONID")

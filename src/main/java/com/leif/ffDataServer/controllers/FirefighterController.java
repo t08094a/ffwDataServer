@@ -1,9 +1,6 @@
 package com.leif.ffDataServer.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.data.mongodb.core.MongoOperations;
@@ -15,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 //import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +22,7 @@ import com.leif.ffDataServer.repositories.FirefighterRepository;
 //import com.leif.ffDataServer.repositories.PersonRepository;
 
 @RestController
-@RequestMapping("/firefighters1")
+@RequestMapping("/firefighters")
 //@Secured("USER")
 public class FirefighterController
 {
@@ -37,13 +35,15 @@ public class FirefighterController
 //	@Autowired
 //	private MongoOperations mongoOperations;
 
-	@RequestMapping(value="/", method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
+	@ResponseStatus(HttpStatus.CREATED )
 	public Firefighter create(@RequestBody Firefighter firefighter)
 	{
 		return repository.save(firefighter);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "{id}", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<Firefighter> get(@PathVariable("id") String id)
 	{
 		Firefighter found = repository.findOne(id);
@@ -59,6 +59,7 @@ public class FirefighterController
 	}
 	
 //	@RequestMapping(method = RequestMethod.GET)
+//	@ResponseStatus(HttpStatus.OK)
 //	public ResponseEntity<List<FireFighter>> get(@RequestParam("lastName") String lastName, @RequestParam(value="firstName", required=false) String firstName)
 //	{
 //		List<Person> persons = null;
@@ -85,13 +86,17 @@ public class FirefighterController
 //		}
 //	}
 	
-	@RequestMapping(value="/", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
 	public Iterable<Firefighter> getAll()
 	{
+		System.out.println(">>> FirefighterController::getAll");
+		
 		return repository.findAll();
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
+	@ResponseStatus(HttpStatus.OK)
 	public Firefighter update(@PathVariable("id") String id, @RequestBody Firefighter firefighter)
 	{
 		Firefighter update = repository.findOne(id);
@@ -111,7 +116,8 @@ public class FirefighterController
 		return repository.save(update);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+	@ResponseStatus(HttpStatus.OK)
 	public void delete(@PathVariable("id") String id)
 	{
 		repository.delete(id);
